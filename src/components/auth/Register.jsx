@@ -24,7 +24,6 @@ const Register = () => {
                 }
             );
             console.log(response.data);
-            localStorage.setItem("token", response.data.jwt);
             toast.success("Registration successful! Redirecting...");
             navigate('/login')
         } catch (error) {

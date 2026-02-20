@@ -23,8 +23,11 @@ const Login = () => {
       { withCredentials: true }
     );
       toast.success('Login successful');
-      if (response?.data?.jwt) localStorage.setItem('token', response.data.jwt);
-      navigate('/')
+      const access = response?.data?.access || response?.data?.jwt || response?.data?.token;
+      const refresh = response?.data?.refresh;
+      if (access) localStorage.setItem('token', access);
+      if (refresh) localStorage.setItem('refresh', refresh);
+      navigate('/');
     } catch (error) {
       console.error(error);
       const errMsg = error.response?.data?.detail || error.response?.data || error.message;
