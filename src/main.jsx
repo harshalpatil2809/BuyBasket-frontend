@@ -9,6 +9,7 @@ import Register from './components/auth/Register.jsx'
 import Contact from './components/Pages/Contact/Contact.jsx'
 import User from "./components/auth/User.jsx";
 import Cart from "./components/Pages/Cart/Cart.jsx";
+import Order from "./components/Pages/Order/Order.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
       { path: "user", element: <User /> },
       { path: "cart", element: <Cart /> },
+      { path: "order", element: <Order /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
     ],
