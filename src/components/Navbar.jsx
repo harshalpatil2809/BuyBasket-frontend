@@ -18,7 +18,7 @@ const Navbar = () => {
   const linkClass = ({ isActive }) =>
     isActive
       ? "text-black underline font-bold block py-2 flex items-center gap-3"
-      : "text-gray-500 block py-2 flex items-center gap-3 font-semibold";
+      : "text-gray-600 block py-2 flex items-center gap-3 font-semibold";
 
   return (
     <>

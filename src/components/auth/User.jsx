@@ -32,12 +32,19 @@ const User = () => {
     }
   };
 
+  const Logout = async () => {
+    const token = localStorage.getItem("token");
+    const authHeader = `Bearer ${token}`;
+    const response = await axios.get("http://127.0.0.1:8000/api/logout/", {
+      headers: { Authorization: authHeader },
+    });
+    console.log(response.data);
+  };
+
   useEffect(() => {
     fetchUser();
   }, []);
 
-
- 
   return (
     <div className="text-black min-h-screen flex flex-col gap-10 items-center justify-center bg-green-200">
       {/* Profile Detaiis */}
@@ -57,13 +64,18 @@ const User = () => {
 
       {/* Butttons */}
       <div className="flex flex-col w-2/5 gap-3">
-        <Link to="/order" replace >
+        <Link to="/order" replace>
           Order
         </Link>
         <Link to="/cart" replace>
           Cart
         </Link>
-        <button onClick={()=>{}}>
+        <button
+          onClick={() => {
+            Logout()
+          }}
+          className="cursor-pointer"
+        >
           Logout
         </button>
       </div>
