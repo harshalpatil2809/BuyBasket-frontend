@@ -9,16 +9,11 @@ const User = () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        // no token: send user to login page
         console.warn("No token found");
-        // ensure leading slash so route is absolute
         navigate("/login", { replace: true });
         return;
       }
-
-      // SimpleJWT expects a Bearer authorization header: "Authorization: Bearer <access>"
       const authHeader = `Bearer ${token}`;
-      // set for this request
       const response = await axios.get("http://127.0.0.1:8000/api/user/", {
         headers: { Authorization: authHeader },
       });
@@ -31,16 +26,18 @@ const User = () => {
       );
     }
   };
-
   const Logout = async () => {
     const token = localStorage.getItem("token");
     const authHeader = `Bearer ${token}`;
-    const response = await axios.get("http://127.0.0.1:8000/api/logout/", {
+    const response = await axios.post("http://127.0.0.1:8000/api/logout/", {
       headers: { Authorization: authHeader },
     });
     console.log(response.data);
+    if (response.data.message === "success") {
+      localStorage.clear();
+      navigate("/login");
+    }
   };
-
   useEffect(() => {
     fetchUser();
   }, []);
@@ -72,7 +69,7 @@ const User = () => {
         </Link>
         <button
           onClick={() => {
-            Logout()
+            Logout();
           }}
           className="cursor-pointer"
         >
