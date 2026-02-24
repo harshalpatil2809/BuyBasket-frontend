@@ -42,6 +42,8 @@ const User = () => {
     fetchUser();
   }, []);
 
+  const BtnStyle = "font-bold px-8 py-3 rounded-full hover:scale-105 cursor-pointer "
+
   return (
     <div className="text-black min-h-screen flex flex-col gap-10 items-center justify-center bg-green-200">
       {/* Profile Detaiis */}
@@ -60,21 +62,28 @@ const User = () => {
       </div>
 
       {/* Butttons */}
-      <div className="flex flex-col w-2/5 gap-3">
-        <Link to="/order" replace>
-          Order
-        </Link>
-        <Link to="/cart" replace>
-          Cart
-        </Link>
-        <button
-          onClick={() => {
-            Logout();
-          }}
-          className="cursor-pointer"
-        >
-          Logout
-        </button>
+      <div className="flex lg:w-2/5 md:w-2/5 w-full gap-3 items-center justify-between px-10">
+        <div className="flex flex-col gap-5 ">
+          <Link to="/order" replace className={`${BtnStyle} bg-white/40`}>
+            Order
+          </Link>
+          <Link to="/cart" replace className={`${BtnStyle} bg-white/40`}>
+            Cart
+          </Link>
+        </div>
+        <div className="flex flex-col gap-5 ">
+          <Link to="/about" replace className={`${BtnStyle} bg-white/40`}>
+            About us
+          </Link>
+          <button
+            onClick={() => {
+              Logout();
+            }}
+            className={`${BtnStyle} bg-red-600 text-white`}
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );
