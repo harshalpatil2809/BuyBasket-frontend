@@ -33,8 +33,8 @@ const Navbar = () => {
             About
           </NavLink>
 
-          <NavLink to="contact" className={linkClass}>
-            Contact
+          <NavLink to="category" className={linkClass}>
+            Category
           </NavLink>
         </div>
         <div className="hidden lg:flex md:flex items-center justify-center gap-8">
