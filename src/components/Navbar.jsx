@@ -70,12 +70,12 @@ const Navbar = () => {
                 About
               </NavLink>
               <NavLink
-                to="contact"
+                to="category"
                 className={linkClass}
                 onClick={toggleMobile}
               >
                 <FaAddressCard />
-                Contact
+                Category
               </NavLink>
               <NavLink
                 to="cart"
