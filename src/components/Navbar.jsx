@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   FaSearch,
@@ -7,11 +7,20 @@ import {
   FaTimes,
   FaHome,
   FaAddressCard,
+  FaTh,
+  FaInfoCircle,
 } from "react-icons/fa";
-import { FaBasketShopping, FaCartShopping, FaCircleInfo } from "react-icons/fa6";
+import {
+  FaBasketShopping,
+  FaCartShopping,
+  FaCircleInfo,
+} from "react-icons/fa6";
+import Context from "../context/Context";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [search, setSearch] = useContext(Context);
+
 
   const toggleMobile = () => setMobileOpen((prev) => !prev);
 
@@ -23,26 +32,35 @@ const Navbar = () => {
   return (
     <>
       <div className="fixed w-full py-3 flex lg:justify-around md:justify-around justify-between lg:px-0 md:px-0 px-5 items-center bg-white/40 z-50">
-        <div className="text-xl font-bold flex gap-2 items-center text-black/80"><FaBasketShopping /> BuyBasket</div>
-        <div className="hidden lg:flex md:flex items-center justify-between lg:w-1/5 md:gap-10">
-          <NavLink to="/" className={linkClass}>
-            Home
-          </NavLink>
-
-          <NavLink to="about" className={linkClass}>
-            About
-          </NavLink>
-
-          <NavLink to="category" className={linkClass}>
-            Category
-          </NavLink>
+        <div className="text-xl font-bold flex gap-2 items-center text-black/80">
+          <FaBasketShopping /> BuyBasket
+        </div>
+        <div className="hidden lg:flex md:flex items-center justify-end lg:w-2/5 md:gap-5">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            className="border bg-white/40 rounded-full px-5 py-2 w-full"
+            placeholder="Search"
+          />
+          <FaSearch />
         </div>
         <div className="hidden lg:flex md:flex items-center justify-center gap-8">
-          <FaSearch />
-          <NavLink to="cart">
+          <NavLink to="/" className={linkClass}>
+            <FaHome />
+          </NavLink>
+          <NavLink to="about" className={linkClass}>
+            <FaInfoCircle />
+          </NavLink>
+          <NavLink to="categories" className={linkClass}>
+            <FaTh />
+          </NavLink>
+          <NavLink to="cart" className={linkClass}>
             <FaCartShopping />
           </NavLink>
-          <NavLink to="user">
+          <NavLink to="user" className={linkClass}>
             <FaUser />
           </NavLink>
         </div>
@@ -70,26 +88,18 @@ const Navbar = () => {
                 About
               </NavLink>
               <NavLink
-                to="category"
+                to="categories"
                 className={linkClass}
                 onClick={toggleMobile}
               >
                 <FaAddressCard />
                 Category
               </NavLink>
-              <NavLink
-                to="cart"
-                className={linkClass}
-                onClick={toggleMobile}
-              >
+              <NavLink to="cart" className={linkClass} onClick={toggleMobile}>
                 <FaCartShopping />
                 Cart
               </NavLink>
-              <NavLink
-                to="user"
-                className={linkClass}
-                onClick={toggleMobile}
-              >
+              <NavLink to="user" className={linkClass} onClick={toggleMobile}>
                 <FaUser />
                 User
               </NavLink>
