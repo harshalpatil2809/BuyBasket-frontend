@@ -2,7 +2,7 @@ import React from "react";
 
 const NormalCard = ({ product }) => {
   return (
-    <div className="bg-white/70 backdrop-blur-md rounded-3xl lg:px-2 md:px-2 shadow-md hover:shadow-xl transition-all duration-300 py-4 px-0 w-45 flex flex-col items-center">
+    <div className="bg-white/70 backdrop-blur-md rounded-3xl lg:px-2 md:px-2 shadow-md hover:shadow-xl transition-all duration-300 py-4 px-0 lg:w-55 md:w-55 w-45 flex flex-col items-center">
       
       <img
         src={product.images?.[0]}

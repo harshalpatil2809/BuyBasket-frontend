@@ -64,7 +64,7 @@ const CategoryDeatil = () => {
         <SkeletonLoader />
       ) : (
         <>
-          <h1 className="text-4xl font-extrabold mb-8 text-center text-green-300">
+          <h1 className="text-4xl font-extrabold mb-8 text-center text-white/80 capitalize">
             {categorie}
           </h1>
 
