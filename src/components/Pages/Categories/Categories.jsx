@@ -1,128 +1,154 @@
 import CateCard from "../../UI/CateCard";
+import { motion } from "motion/react"
+
+const Beauty = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179506/Beauty_x0b98r.jpg"
+const Fragrances = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179508/Fragrances_ilxkts.jpg"
+const Furniture = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179511/Furniture_budcgw.jpg"
+const Groceries = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179507/Groceries_gt83bz.jpg"
+const Home_Decoration = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179509/HomeDecoration_kada69.jpg"
+const Kitchen_Accessories = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179509/KitchenAccessories_afltre.jpg"
+const Laptops = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179508/Laptops_pjpkm8.jpg"
+const Mens_Shirts = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179515/Men_sShirt_k7dgve.jpg"
+const Mens_Shoes = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179520/MensShoes_twtwso.jpg"
+const Mens_Watches = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179513/Mens_Watches_s1rriw.jpg"
+const Mobile_Accessories = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179517/Mobile_Accessories_g5vwnp.avif"
+const Motorcycle = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179518/Motorcycle_xs8rpu.jpg"
+const Skin_Care = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179518/SkinCare_bsfpdy.avif"
+const Mobiles = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179520/Mobiles_ynllcv.jpg"
+const Sports_Accessories = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179526/SportsAccessories_ufosdb.jpg"
+const Sunglasses = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179522/Sunglasses_re9ven.jpg"
+const Tablets = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179524/Tablets_wqnjox.avif"
+const Tops = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179530/Womens_Dresses_pvoteb.jpg"
+const Vehicle = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179536/Vehicle_vyev6c.jpg"
+const Womens_Bags = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179528/Womens_Bags_lutxld.jpg"
+const Womens_Dresses = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179528/Tops_nepyo3.jpg"
+const Womens_Jewellery = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179530/Womens_Jewellery_iisiqw.jpg"
+const Womens_Shoes = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/Womens_Shoes_zpryrr.jpg"
+const Womens_Watches = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/Womens_Watches_lqs07s.avif"
 
 const Categories = () => {
     const categories = [
-    {
-        img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
-        name: "Beauty",
-        cate: "beauty",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad",
-        name: "Fragrances",
-        cate: "fragrances",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-        name: "Furniture",
-        cate: "furniture",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1542838132-92c53300491e",
-        name: "Groceries",
-        cate: "groceries",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4",
-        name: "Home Decoration",
-        cate: "home-decoration",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1506368083636-6defb67639a7",
-        name: "Kitchen Accessories",
-        cate: "kitchen-accessories",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
-        name: "Laptops",
-        cate: "laptops",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-        name: "Mens Shirts",
-        cate: "mens-shirts",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1549298916-b41d501d3772",
-        name: "Mens Shoes",
-        cate: "mens-shoes",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-        name: "Mens Watches",
-        cate: "mens-watches",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1677145503731-87bfe49e5c67?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        name: "Mobile Accessories",
-        cate: "mobile-accessories",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1558981806-ec527fa84c39",
-        name: "Motorcycle",
-        cate: "motorcycle",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        name: "Skin Care",
-        cate: "skin-care",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
-        name: "Mobiles",
-        cate: "smartphones",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1517649763962-0c623066013b",
-        name: "Sports Accessories",
-        cate: "sports-accessories",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083",
-        name: "Sunglasses",
-        cate: "sunglasses",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1623126908029-58cb08a2b272?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        name: "Tablets",
-        cate: "tablets",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d",
-        name: "Tops",
-        cate: "tops",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1502877338535-766e1452684a",
-        name: "Vehicle",
-        cate: "vehicle",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3",
-        name: "Womens Bags",
-        cate: "womens-bags",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1496747611176-843222e1e57c",
-        name: "Womens Dresses",
-        cate: "womens-dresses",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338",
-        name: "Womens Jewellery",
-        cate: "womens-jewellery",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2",
-        name: "Womens Shoes",
-        cate: "womens-shoes",
-    },
-    {
-        img: "https://images.unsplash.com/photo-1451290337906-ac938fc89bce?q=80&w=1318&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        name: "Womens Watches",
-        cate: "womens-watches",
-    },
-];
+        {
+            img: Beauty,
+            name: "Beauty",
+            cate: "beauty",
+        },
+        {
+            img: Fragrances,
+            name: "Fragrances",
+            cate: "fragrances",
+        },
+        {
+            img: Furniture,
+            name: "Furniture",
+            cate: "furniture",
+        },
+        {
+            img: Groceries,
+            name: "Groceries",
+            cate: "groceries",
+        },
+        {
+            img: Home_Decoration,
+            name: "Home Decoration",
+            cate: "home-decoration",
+        },
+        {
+            img: Kitchen_Accessories,
+            name: "Kitchen Accessories",
+            cate: "kitchen-accessories",
+        },
+        {
+            img: Laptops,
+            name: "Laptops",
+            cate: "laptops",
+        },
+        {
+            img: Mens_Shirts,
+            name: "Mens Shirts",
+            cate: "mens-shirts",
+        },
+        {
+            img: Mens_Shoes,
+            name: "Mens Shoes",
+            cate: "mens-shoes",
+        },
+        {
+            img: Mens_Watches,
+            name: "Mens Watches",
+            cate: "mens-watches",
+        },
+        {
+            img: Mobile_Accessories,
+            name: "Mobile Accessories",
+            cate: "mobile-accessories",
+        },
+        {
+            img: Motorcycle,
+            name: "Motorcycle",
+            cate: "motorcycle",
+        },
+        {
+            img: Skin_Care,
+            name: "Skin Care",
+            cate: "skin-care",
+        },
+        {
+            img: Mobiles,
+            name: "Mobiles",
+            cate: "smartphones",
+        },
+        {
+            img: Sports_Accessories,
+            name: "Sports Accessories",
+            cate: "sports-accessories",
+        },
+        {
+            img: Sunglasses,
+            name: "Sunglasses",
+            cate: "sunglasses",
+        },
+        {
+            img: Tablets,
+            name: "Tablets",
+            cate: "tablets",
+        },
+        {
+            img: Tops,
+            name: "Tops",
+            cate: "tops",
+        },
+        {
+            img: Vehicle,
+            name: "Vehicle",
+            cate: "vehicle",
+        },
+        {
+            img: Womens_Bags,
+            name: "Womens Bags",
+            cate: "womens-bags",
+        },
+        {
+            img: Womens_Dresses,
+            name: "Womens Dresses",
+            cate: "womens-dresses",
+        },
+        {
+            img: Womens_Jewellery,
+            name: "Womens Jewellery",
+            cate: "womens-jewellery",
+        },
+        {
+            img: Womens_Shoes,
+            name: "Womens Shoes",
+            cate: "womens-shoes",
+        },
+        {
+            img: Womens_Watches,
+            name: "Womens Watches",
+            cate: "womens-watches",
+        },
+    ];
 
     return (
         <div className="min-h-screen bg-linear-to-br from-[#B9F8CF] to-[#A0E9C2]">
@@ -140,7 +166,7 @@ const Categories = () => {
                       grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
                 >
                     {categories.map((data) => (
-                        <div
+                        <motion.div
                             whileTap={{ scale: 0.95 }}
                             whileHover={{ scale: 1.03 }}
                             transition={{ type: "spring", stiffness: 200 }}
@@ -151,7 +177,7 @@ const Categories = () => {
                                 name={data.name}
                                 cate={data.cate}
                             />
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

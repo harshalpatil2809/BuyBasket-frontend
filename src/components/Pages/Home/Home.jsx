@@ -51,7 +51,7 @@ const Home = () => {
           allProduct.map((product) => (
             <div
               key={product.id}
-              className="bg-white/70 backdrop-blur-md rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 py-4 px-0 w-45 flex flex-col items-center"
+              className="bg-white/70 backdrop-blur-md rounded-3xl lg:px-2 md:px-2 shadow-md hover:shadow-xl transition-all duration-300 py-4 px-0 w-45 flex flex-col items-center"
             >
               <img
                 src={product.images?.[0]}
