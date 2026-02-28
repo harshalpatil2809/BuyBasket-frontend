@@ -1,7 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const CategoryCard = ({ thumbnail, brand, price, rating }) => {
-
+const CategoryCard = ({ thumbnail, brand, price, rating, id }) => {
+    const navigate = useNavigate();
+    const Product = (id) =>{
+    navigate(`/product/${id}`)
+  }
     
     return (
         <div
@@ -16,6 +20,7 @@ const CategoryCard = ({ thumbnail, brand, price, rating }) => {
                 fetchPriority="high"
                 className="rounded-xl w-full h-32 md:h-40 object-cover 
         group-hover:scale-105 transition-transform duration-300"
+                onClick={() => Product(id)}
             />
 
             {/* Brand */}

@@ -64,7 +64,7 @@ const CategoryDeatil = () => {
         <SkeletonLoader />
       ) : (
         <>
-          <h1 className="text-4xl font-extrabold mb-8 text-center text-white/80 capitalize">
+          <h1 className="text-4xl font-bold mb-8 text-center text-[#065F46] capitalize">
             {categorie}
           </h1>
 
@@ -80,6 +80,7 @@ const CategoryDeatil = () => {
                   brand = {item.brand}
                   price = {item.price}
                   rating = {item.rating}
+                  id = {item.id}
                 />
               </motion.div>
               
