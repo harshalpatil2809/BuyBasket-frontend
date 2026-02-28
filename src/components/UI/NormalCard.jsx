@@ -1,10 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-const NormalCard = ({ product , id}) => {
+const NormalCard = ({ product}) => {
   const navigate = useNavigate()
   const Product = (id) =>{
-    navigate(`product/:${id}`)
+    navigate(`/product/${id}`)
   }
+
   return (
     <div className="bg-white/70 backdrop-blur-md rounded-3xl lg:px-2 md:px-2 shadow-md hover:shadow-xl transition-all duration-300 py-4 px-0 lg:w-55 md:w-55 w-45 flex flex-col items-center">
       
@@ -13,7 +14,7 @@ const NormalCard = ({ product , id}) => {
         alt={product.title}
         loading="eager"
         className="w-32 h-auto object-cover rounded-2xl mb-4"
-        onClick={Product}
+        onClick={() => Product(product.id)}
       />
 
       <h2 className="text-lg font-semibold text-gray-800 text-center line-clamp-1">

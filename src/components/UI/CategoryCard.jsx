@@ -1,7 +1,8 @@
 import React from 'react'
 
 const CategoryCard = ({ thumbnail, brand, price, rating }) => {
-    console.log(thumbnail, brand, price, rating)
+
+    
     return (
         <div
             className="p-3 bg-white rounded-2xl shadow-md hover:shadow-xl 
