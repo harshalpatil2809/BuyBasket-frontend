@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SkeletonLoader from "../../UI/SkeletonLoader";
 import NormalCard from "../../UI/NormalCard";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
   const [allProduct, setAllProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {id} = useParams();
 
   useEffect(() => {
     let timer;
@@ -50,7 +52,7 @@ const Home = () => {
           {!loading &&
             allProduct.map((product) => (
               <div key={product.id}>
-                <NormalCard product={product} />
+                <NormalCard product={product} id={id}/>
               </div>
             ))}
         </div>

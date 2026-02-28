@@ -11,6 +11,7 @@ import Cart from "./components/Pages/Cart/Cart.jsx";
 import Order from "./components/Pages/Order/Order.jsx";
 import Categories from "./components/Pages/Categories/Categories.jsx";
 import CategoryDeatil from "./components/Pages/CategoryDetail/CategoryDeatil.jsx";
+import Product from "./components/Pages/Product/Product.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "categoriesdetail/:categorie",
         element: <CategoryDeatil />,
+      },
+      {
+        path: "product/:id",
+        element: <Product />,
       },
       { path: "user", element: <User /> },
       { path: "cart", element: <Cart /> },
