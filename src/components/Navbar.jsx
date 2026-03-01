@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaSearch,
   FaUser,
@@ -16,11 +16,12 @@ import {
   FaCircleInfo,
 } from "react-icons/fa6";
 import Context from "../context/Context";
+import { ToastContainer, toast } from "react-toastify";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [search, setSearch] = useContext(Context);
-
+  const { search, setSearch } = useContext(Context);
+  const navigate = useNavigate();
 
   const toggleMobile = () => setMobileOpen((prev) => !prev);
 
@@ -29,13 +30,63 @@ const Navbar = () => {
       ? "text-black underline font-bold block py-2 flex items-center gap-3"
       : "text-gray-600 block py-2 flex items-center gap-3 font-semibold";
 
+  let productList = [
+    "beauty",
+    "fragrances",
+    "furniture",
+    "groceries",
+    "home-decoration",
+    "kitchen-accessories",
+    "laptops",
+    "mens-shirts",
+    "mens-shoes",
+    "mens-watches",
+    "mobile-accessories",
+    "motorcycle",
+    "skin-care",
+    "smartphones",
+    "sports-accessories",
+    "sunglasses",
+    "tablets",
+    "tops",
+    "vehicle",
+    "womens-bags",
+    "womens-dresses",
+    "womens-jewellery",
+    "womens-shoes",
+    "womens-watches",
+  ];
+
+  function handleSearch(e) {
+    e.preventDefault();
+
+    const trimmedInput = search.trim();
+    const normalizedInput = trimmedInput.toLowerCase();
+
+    if (!search) {
+      toast.warning("Search Something");
+      return;
+    }
+
+    if (productList.includes(normalizedInput)) {
+      navigate(`/categoriesdetail/${normalizedInput}`);
+      setSearch("");
+    } else {
+      toast.error("The item you search is not available yet.");
+      setSearch("");
+    }
+  }
   return (
     <>
+      <ToastContainer position="top-right" autoClose={2000} />
       <div className="fixed w-full py-3 flex lg:justify-around md:justify-around justify-between lg:px-0 md:px-0 px-5 items-center bg-white/40 z-50">
         <div className="text-xl font-bold flex gap-2 items-center text-black/80">
           <FaBasketShopping /> BuyBasket
         </div>
-        <div className="hidden lg:flex md:flex items-center justify-end lg:w-2/5 md:gap-5">
+        <form
+          onSubmit={handleSearch}
+          className="hidden lg:flex md:flex items-center justify-end lg:w-2/5 md:gap-5"
+        >
           <input
             type="text"
             value={search}
@@ -45,8 +96,10 @@ const Navbar = () => {
             className="border bg-white/40 rounded-full px-5 py-2 w-full"
             placeholder="Search"
           />
-          <FaSearch />
-        </div>
+          <button type="submit">
+            <FaSearch />
+          </button>
+        </form>
         <div className="hidden lg:flex md:flex items-center justify-center gap-8">
           <NavLink to="/" className={linkClass}>
             <FaHome />

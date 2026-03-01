@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
-import Context from './Context'
+import {  useState } from "react";
+import Context from "./Context";
 
 
-const ContextProvider = ({children}) => {
-    const [search, setSearch] = useState('')
-    const [mobileOpen, setMobileOpen] = useState(false);
-    const [seachbar, setSearchbar] = useState(false);
+const ContextProvider = ({ children }) => {
+  const [search, setSearch] = useState("");
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [searchbar, setSearchbar] = useState(false)
+
   return (
-    <Context.Provider value={[search, setSearch,mobileOpen,setMobileOpen,seachbar,setSearchbar]}>
-        {children}
+    <Context.Provider value={{search, setSearch,mobileOpen,setMobileOpen,searchbar,setSearchbar}}>
+      {children}
     </Context.Provider>
-  )
-}
+  );
+};
 
-export default ContextProvider
+export default ContextProvider;
