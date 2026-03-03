@@ -20,6 +20,7 @@ const CategoryCard = ({ thumbnail, brand, price, rating, id }) => {
                 fetchPriority="high"
                 className="rounded-xl w-full h-32 md:h-40 object-cover 
         group-hover:scale-105 transition-transform duration-300"
+                draggable="false"
                 onClick={() => Product(id)}
             />
 

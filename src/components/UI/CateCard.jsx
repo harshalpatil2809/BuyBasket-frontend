@@ -20,6 +20,7 @@ const CateCard = ({ img, name, cate }) => {
                 fetchPriority="high"
                 className="rounded-xl w-full h-32 md:h-40 object-cover 
                group-hover:scale-105 transition-transform duration-300"
+                draggable="false"
             />
             <p
                 className="text-lg md:text-xl font-semibold text-[#065F46] 
