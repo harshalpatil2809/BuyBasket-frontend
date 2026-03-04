@@ -20,6 +20,11 @@ const Sunglasses = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_a
 const Tablets = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179524/Tablets_wqnjox.avif"
 const Tops = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179530/Womens_Dresses_pvoteb.jpg"
 const Vehicle = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179536/Vehicle_vyev6c.jpg"
+const Womens_Bags = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179528/Womens_Bags_lutxld.jpg"
+const Womens_Dresses = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179528/Tops_nepyo3.jpg"
+const Womens_Jewellery = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179530/Womens_Jewellery_iisiqw.jpg"
+const Womens_Shoes = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179532/Womens_Shoes_zpryrr.jpg"
+const Womens_Watches = "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179531/Womens_Watches_lqs07s.avif"
 
 const Categories = () => {
     const categories = [

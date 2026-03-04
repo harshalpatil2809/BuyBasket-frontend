@@ -23,13 +23,13 @@ const Tops =
   "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179530/Womens_Dresses_pvoteb.jpg";
 
 const HeroIMG1 =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/v1772532647/banner-washing-machines_bg5ogq.png";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772532647/banner-washing-machines_bg5ogq.png";
 const HeroIMG2 =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/v1772532647/banner-natural-skincare_b4hyck.png";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772532647/banner-natural-skincare_b4hyck.png";
 const HeroIMG3 =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/v1772532646/banner-iphone-collection_w8rwsd.png";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772532646/banner-iphone-collection_w8rwsd.png";
 const HeroIMG4 =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/v1772533301/banner-big-sale_pfsg2b.png";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772533301/banner-big-sale_pfsg2b.png";
 
 const categories = [
   { img: Beauty, name: "Beauty", cate: "beauty" },
