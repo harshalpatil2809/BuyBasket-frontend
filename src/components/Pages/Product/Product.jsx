@@ -1,79 +1,103 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import toast, {Toaster} from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import NoProduct from "../../UI/NoProduct";
 
 const Product = () => {
-  const [product, setProduct] = useState(null);
-  const [Loader, setLoader] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
   const { id } = useParams();
 
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [addingCart, setAddingCart] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   useEffect(() => {
-    async function fetchProduct() {
+    const fetchProduct = async () => {
       try {
-        setLoader(true);
-        const response = await axios.get(
-          `https://dummyjson.com/products/${id}`
+        setLoading(true);
+
+        const { data } = await axios.get(
+          `https://dummyjson.com/products/${id}`,
         );
-        setProduct(response.data);
-        setSelectedImage(response.data.images?.[0]);
+
+        setProduct(data);
+        setSelectedImage(data.images?.[0] || data.thumbnail);
       } catch (error) {
-        let errorMessage = "An unknown error occurred.";
-        if (error.response) {
-          const status = error.response.status;
-          if (status === 404) {
-            errorMessage = `Resource not found: 404`;
-          } else if (status >= 500) {
-            errorMessage = `Server Error (${status}): Please try again later.`;
-          }
+        let message = "Something went wrong";
+
+        if (error.response?.status === 404) {
+          message = "Product not found";
+        } else if (error.response?.status >= 500) {
+          message = "Server error. Try again later";
         } else if (error.request) {
-          errorMessage =
-            "Network Error: Could not connect to the server.";
-        } else {
-          errorMessage = `Application Error: ${error.message}`;
+          message = "Network error";
         }
 
-        toast.error(errorMessage, { duration: 5000 });
+        toast.error(message);
       } finally {
-        setLoader(false);
+        setLoading(false);
       }
-    }
+    };
 
     fetchProduct();
   }, [id]);
 
-  if (Loader) {
+  const handleAddToCart = async () => {
+    if (!product || product.stock === 0) return;
+
+    try {
+      setAddingCart(true);
+
+      await axios.post("http://127.0.0.1:8000/cart/add-cart/", {
+        product_name: product.title,
+        price: product.price,
+        quantity: 1,
+        image: product.thumbnail,
+      });
+
+      toast.success("Added to cart");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to add product");
+    } finally {
+      setAddingCart(false);
+    }
+  };
+
+  if (loading) {
     return (
-      <div className="min-h-screen bg-green-200 flex items-center justify-center text-xl font-semibold">
-        Loading Product...
+      <div className="min-h-screen flex items-center justify-center bg-green-200">
+        <p className="text-xl font-semibold">Loading product...</p>
       </div>
     );
   }
 
   if (!product) return <NoProduct />;
 
-  return (
-    <div className="min-h-screen bg-green-200 flex items-center justify-center p-6 pt-15">
-      <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-8 max-w-6xl w-full grid md:grid-cols-2 gap-10">
+  const inStock = product.stock > 0;
 
-        {/* LEFT - Images */}
+  return (
+    <div className="min-h-screen bg-green-200 flex items-center justify-center p-6 pt-16">
+      <Toaster position="top-right" reverseOrder={false} />
+      <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-8 max-w-6xl w-full grid md:grid-cols-2 gap-10">
+        {/* Product Images */}
         <div>
           <img
             src={selectedImage}
             alt={product.title}
-            className="w-full max-w-md mx-auto rounded-3xl shadow-md mb-6"
+            className="w-full max-w-md mx-auto rounded-2xl shadow-md mb-6"
           />
 
-          <div className="flex gap-4 justify-center">
+          <div className="flex gap-3 justify-center flex-wrap">
             {product.images?.map((img, index) => (
               <img
                 key={index}
                 src={img}
-                alt="thumbnail"
+                alt="product"
                 onClick={() => setSelectedImage(img)}
-                className={`w-20 h-20 rounded-xl object-cover cursor-pointer transition ${
+                className={`w-20 h-20 object-cover rounded-lg cursor-pointer transition
+                ${
                   selectedImage === img
                     ? "ring-2 ring-green-500"
                     : "hover:scale-105"
@@ -83,49 +107,56 @@ const Product = () => {
           </div>
         </div>
 
-        {/* RIGHT - Details */}
+        {/* Product Details */}
         <div className="flex flex-col">
-
-          <h1 className="text-3xl font-bold text-gray-800">
-            {product.title}
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-800">{product.title}</h1>
 
           <p className="text-gray-500 mt-1">
-            Brand: <span className="font-medium text-gray-700">{product.brand}</span>
+            Brand:
+            <span className="ml-2 font-medium text-gray-700">
+              {product.brand}
+            </span>
           </p>
 
+          {/* Rating + Stock */}
           <div className="flex items-center gap-6 mt-4">
-            <div className="flex items-center text-yellow-500 font-medium">
+            <div className="text-yellow-500 font-medium">
               ⭐ {product.rating}
             </div>
 
             <span
-              className={`px-3 py-1 rounded-full text-sm font-medium ${
-                product.stock > 0
+              className={`px-3 py-1 rounded-full text-sm font-medium
+              ${
+                inStock
                   ? "bg-green-100 text-green-700"
                   : "bg-red-100 text-red-600"
               }`}
             >
-              {product.availabilityStatus}
+              {inStock ? "In Stock" : "Out of Stock"}
             </span>
           </div>
 
+          {/* Price */}
           <div className="mt-6">
             <p className="text-3xl font-bold text-green-600">
-              ${product.price}
+              ${product.price.toFixed(2)}
             </p>
+
             <p className="text-sm text-gray-500">
               {product.discountPercentage}% Discount
             </p>
           </div>
 
+          {/* Description */}
           <div className="mt-6">
             <h3 className="font-semibold text-gray-800 mb-2">Description</h3>
+
             <p className="text-gray-600 leading-relaxed">
               {product.description}
             </p>
           </div>
 
+          {/* Extra Details */}
           <div className="grid grid-cols-2 gap-4 mt-6 text-sm text-gray-600">
             <div>SKU: {product.sku}</div>
             <div>Weight: {product.weight}g</div>
@@ -135,10 +166,28 @@ const Product = () => {
             <div>{product.shippingInformation}</div>
           </div>
 
-          <button className="mt-8 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl transition font-semibold">
-            Add to Cart
-          </button>
+          {/* Buttons */}
+          <div className="flex w-full gap-3 mt-8">
+            <button
+              onClick={handleAddToCart}
+              disabled={!inStock || addingCart}
+              className={`w-1/2 py-3 rounded-xl font-semibold transition
+              ${
+                inStock
+                  ? "bg-green-600 hover:bg-green-700 text-white"
+                  : "bg-gray-400 cursor-not-allowed text-white"
+              }`}
+            >
+              {addingCart ? "Adding..." : "Add to Cart"}
+            </button>
 
+            <button
+              disabled={!inStock}
+              className="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition font-semibold"
+            >
+              Buy Now
+            </button>
+          </div>
         </div>
       </div>
     </div>
