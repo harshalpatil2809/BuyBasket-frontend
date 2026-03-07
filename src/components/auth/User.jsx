@@ -1,89 +1,141 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ShoppingCart, Package, Info, LogOut } from "lucide-react";
 
 const User = () => {
   const navigate = useNavigate();
-  const [response, setResponse] = useState([]);
+  const [response, setResponse] = useState({});
+
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        console.warn("No token found");
         navigate("/login", { replace: true });
         return;
       }
-      const authHeader = `Bearer ${token}`;
-      const response = await axios.get("http://127.0.0.1:8000/api/user/", {
-        headers: { Authorization: authHeader },
-      });
-      setResponse(response.data);
-    } catch (error) {
-      console.error(
-        "Failed to fetch user:",
-        error.response?.status,
-        error.response?.data || error.message,
+
+      const { data } = await axios.get(
+        "http://127.0.0.1:8000/api/user/",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
+
+      setResponse(data);
+    } catch (error) {
+      console.error(error);
     }
   };
+
   const Logout = async () => {
-    const token = localStorage.getItem("token");
-    const authHeader = `Bearer ${token}`;
-    const response = await axios.post("http://127.0.0.1:8000/api/logout/", {
-      headers: { Authorization: authHeader },
-    });
-    console.log(response.data);
-    if (response.data.message === "success") {
-      localStorage.clear();
-      navigate("/login");
+    try {
+      const token = localStorage.getItem("token");
+
+      const { data } = await axios.post(
+        "http://127.0.0.1:8000/api/logout/",
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (data.message === "success") {
+        localStorage.clear();
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
   useEffect(() => {
     fetchUser();
   }, []);
 
-  const BtnStyle = "font-bold px-8 py-3 rounded-full hover:scale-105 cursor-pointer "
-
   return (
-    <div className="text-black min-h-screen flex flex-col gap-10 items-center justify-center bg-green-200">
-      {/* Profile Detaiis */}
-      <div className="flex items-center flex-col gap-2">
-        <div>
+    <div className="min-h-screen bg-green-200 flex items-center justify-center px-6">
+
+      <div className="w-full max-w-4xl">
+
+        {/* Profile Card */}
+        <div className="bg-white/60 backdrop-blur-lg rounded-3xl shadow-xl p-10 text-center mb-10">
+
           <img
             src="./profile-pic.png"
-            alt="Profile-pic"
-            className="w-50 h-auto bg-transparent rounded-full mb-6 object-cover"
+            alt="profile"
+            className="w-32 h-32 rounded-full mx-auto mb-4 shadow-md"
           />
-        </div>
-        <div className="">{response.name}</div>
-        <div>
-          <h3>{response.email}</h3>
-        </div>
-      </div>
 
-      {/* Butttons */}
-      <div className="flex lg:w-2/5 md:w-2/5 w-full gap-3 items-center justify-between px-10">
-        <div className="flex flex-col gap-5 ">
-          <Link to="/order" replace className={`${BtnStyle} bg-white/40`}>
-            Order
-          </Link>
-          <Link to="/cart" replace className={`${BtnStyle} bg-white/40`}>
-            Cart
-          </Link>
+          <h2 className="text-2xl font-bold text-gray-800">
+            {response.name}
+          </h2>
+
+          <p className="text-gray-600">
+            {response.email}
+          </p>
+
         </div>
-        <div className="flex flex-col gap-5 ">
-          <Link to="/about" replace className={`${BtnStyle} bg-white/40`}>
-            About us
-          </Link>
-          <button
-            onClick={() => {
-              Logout();
-            }}
-            className={`${BtnStyle} bg-red-600 text-white`}
+
+        {/* Action Buttons */}
+        <div className="grid md:grid-cols-2 gap-6">
+
+          <Link
+            to="/order"
+            className="flex items-center justify-between bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow-md hover:shadow-lg hover:scale-[1.02] transition"
           >
-            Logout
+            <div>
+              <h3 className="text-lg font-semibold">Your Orders</h3>
+              <p className="text-gray-500 text-sm">
+                Track your previous purchases
+              </p>
+            </div>
+
+            <Package size={28} />
+          </Link>
+
+          <Link
+            to="/cart"
+            className="flex items-center justify-between bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow-md hover:shadow-lg hover:scale-[1.02] transition"
+          >
+            <div>
+              <h3 className="text-lg font-semibold">Your Cart</h3>
+              <p className="text-gray-500 text-sm">
+                View products in cart
+              </p>
+            </div>
+
+            <ShoppingCart size={28} />
+          </Link>
+
+          <Link
+            to="/about"
+            className="flex items-center justify-between bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow-md hover:shadow-lg hover:scale-[1.02] transition"
+          >
+            <div>
+              <h3 className="text-lg font-semibold">About Us</h3>
+              <p className="text-gray-500 text-sm">
+                Learn more about our company
+              </p>
+            </div>
+
+            <Info size={28} />
+          </Link>
+
+          <button
+            onClick={Logout}
+            className="flex items-center justify-between bg-red-600 text-white p-6 rounded-2xl shadow-md hover:scale-[1.02] transition"
+          >
+            <div>
+              <h3 className="text-lg font-semibold">Logout</h3>
+              <p className="text-red-100 text-sm">
+                Securely sign out
+              </p>
+            </div>
+
+            <LogOut size={28} />
           </button>
+
         </div>
+
       </div>
     </div>
   );

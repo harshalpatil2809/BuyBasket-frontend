@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import toast, {Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import NoProduct from "../../UI/NoProduct";
 
@@ -45,16 +45,25 @@ const Product = () => {
 
   const handleAddToCart = async () => {
     if (!product || product.stock === 0) return;
+    let token = localStorage.getItem("token");
 
     try {
       setAddingCart(true);
 
-      await axios.post("http://127.0.0.1:8000/cart/add-cart/", {
-        product_name: product.title,
-        price: product.price,
-        quantity: 1,
-        image: product.thumbnail,
-      });
+      await axios.post(
+        "http://127.0.0.1:8000/cart/addcart/",
+        {
+          product_name: product.title,
+          price: product.price,
+          quantity: 1,
+          image: product.thumbnail,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
       toast.success("Added to cart");
     } catch (error) {
@@ -79,7 +88,7 @@ const Product = () => {
 
   return (
     <div className="min-h-screen bg-green-200 flex items-center justify-center p-6 pt-16">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-8 max-w-6xl w-full grid md:grid-cols-2 gap-10">
         {/* Product Images */}
         <div>
