@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -16,7 +18,7 @@ const Cart = () => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
 
         setCartItems(data);
@@ -67,13 +69,9 @@ const Cart = () => {
   return (
     <div className="min-h-screen bg-green-200 py-20 px-6">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
-
         {/* Cart Items */}
         <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6">
-
-          <h1 className="text-2xl font-semibold mb-6">
-            🛒 Shopping Cart
-          </h1>
+          <h1 className="text-2xl font-semibold mb-6">🛒 Shopping Cart</h1>
 
           <div className="grid grid-cols-5 text-sm font-semibold text-gray-500 border-b pb-3">
             <div className="col-span-2">Product</div>
@@ -110,19 +108,14 @@ const Cart = () => {
 
               <div className="text-gray-600">{item.quantity}</div>
 
-              <div className="font-semibold text-gray-800">
-                ${item.total}
-              </div>
+              <div className="font-semibold text-gray-800">${item.total}</div>
             </div>
           ))}
         </div>
 
         {/* Order Summary */}
         <div className="bg-white rounded-2xl shadow-lg p-6 h-fit">
-
-          <h2 className="text-xl font-semibold mb-4">
-            Order Summary
-          </h2>
+          <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 
           <div className="flex justify-between mb-3 text-gray-600">
             <span>Items</span>
@@ -141,17 +134,16 @@ const Cart = () => {
 
           <div className="border-t pt-3 flex justify-between font-bold text-lg">
             <span>Total</span>
-            <span className="text-green-600">
-              ${totalPrice.toFixed(2)}
-            </span>
+            <span className="text-green-600">${totalPrice.toFixed(2)}</span>
           </div>
 
-          <button className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition">
+          <button
+            onClick={() => navigate("/delivery", { state: { cartItems } })}
+            className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition"
+          >
             Checkout
           </button>
-
         </div>
-
       </div>
     </div>
   );

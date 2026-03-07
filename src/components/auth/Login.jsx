@@ -1,10 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { FaEnvelope,FaLock,FaEye,FaEyeSlash } from "react-icons/fa";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {Link,useNavigate} from 'react-router-dom'
-
+import React, { useEffect, useState } from "react";
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,38 +12,48 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("/user");
+    }
+  }, []);
+
   const LoginData = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/login/", {
-        email: email,
-        password: password,
-      },
-      { withCredentials: true }
-    );
-      toast.success('Login successful');
-      const access = response?.data?.access || response?.data?.jwt || response?.data?.token;
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/login/",
+        {
+          email: email,
+          password: password,
+        },
+        { withCredentials: true },
+      );
+      toast.success("Login successful");
+      const access =
+        response?.data?.access || response?.data?.jwt || response?.data?.token;
       const refresh = response?.data?.refresh;
-      if (access) localStorage.setItem('token', access);
-      if (refresh) localStorage.setItem('refresh', refresh);
-      navigate('/');
+      if (access) localStorage.setItem("token", access);
+      if (refresh) localStorage.setItem("refresh", refresh);
+      navigate("/");
     } catch (error) {
       console.error(error);
-      const errMsg = error.response?.data?.detail || error.response?.data || error.message;
-      toast.error(typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg));
+      const errMsg =
+        error.response?.data?.detail || error.response?.data || error.message;
+      toast.error(typeof errMsg === "string" ? errMsg : JSON.stringify(errMsg));
     } finally {
       setLoading(false);
     }
   };
 
-
-      const handleLogin = (e) => {
-        e.preventDefault();
-        LoginData();
-        setEmail('');
-        setPassword('');
-    };
-
+  const handleLogin = (e) => {
+    e.preventDefault();
+    LoginData();
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-r from-green-200 via-white to-green-200">
@@ -127,10 +136,20 @@ const Login = () => {
         <p className="text-sm text-center text-gray-500 mt-6">
           Don't have an account? <br />
           <span className="text-green-600 font-medium cursor-pointer hover:underline">
-            <Link to={'/register'}>Register</Link>
+            <Link to={"/register"}>Register</Link>
           </span>
         </p>
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </div>
   );

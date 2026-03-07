@@ -5,11 +5,12 @@ import { ShoppingCart, Package, Info, LogOut } from "lucide-react";
 
 const User = () => {
   const navigate = useNavigate();
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState(null);
 
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem("token");
+
       if (!token) {
         navigate("/login", { replace: true });
         return;
@@ -18,13 +19,23 @@ const User = () => {
       const { data } = await axios.get(
         "http://127.0.0.1:8000/api/user/",
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
       setResponse(data);
     } catch (error) {
-      console.error(error);
+      console.error(
+        "User fetch error:",
+        error.response?.data || error.message
+      );
+
+      if (error.response?.status === 401) {
+        localStorage.clear();
+        navigate("/login");
+      }
     }
   };
 
@@ -34,8 +45,12 @@ const User = () => {
 
       const { data } = await axios.post(
         "http://127.0.0.1:8000/api/logout/",
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (data.message === "success") {
@@ -43,7 +58,10 @@ const User = () => {
         navigate("/login");
       }
     } catch (error) {
-      console.log(error);
+      console.error(
+        "Logout error:",
+        error.response?.data || error.message
+      );
     }
   };
 
@@ -66,11 +84,11 @@ const User = () => {
           />
 
           <h2 className="text-2xl font-bold text-gray-800">
-            {response.name}
+            {response?.name}
           </h2>
 
           <p className="text-gray-600">
-            {response.email}
+            {response?.email}
           </p>
 
         </div>
@@ -125,7 +143,7 @@ const User = () => {
             className="flex items-center justify-between bg-red-600 text-white p-6 rounded-2xl shadow-md hover:scale-[1.02] transition"
           >
             <div>
-              <h3 className="text-lg font-semibold">Logout</h3>
+              <h3 className="text-lg font-semibold text-start">Logout</h3>
               <p className="text-red-100 text-sm">
                 Securely sign out
               </p>

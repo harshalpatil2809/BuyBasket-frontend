@@ -12,6 +12,8 @@ import Order from "./components/Pages/Order/Order.jsx";
 import Categories from "./components/Pages/Categories/Categories.jsx";
 import CategoryDeatil from "./components/Pages/CategoryDetail/CategoryDeatil.jsx";
 import Product from "./components/Pages/Product/Product.jsx";
+import Delivery from "./components/Pages/Delivery/Delivery.jsx";
+import Payment from "./components/Pages/Payment/Payment.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: "product/:id",
         element: <Product />,
+      },
+      {
+        path: "/delivery",
+        element: <Delivery />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
       },
       { path: "user", element: <User /> },
       { path: "cart", element: <Cart /> },
