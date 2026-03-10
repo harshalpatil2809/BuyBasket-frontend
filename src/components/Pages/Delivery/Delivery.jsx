@@ -48,6 +48,7 @@ const Delivery = () => {
                         type="text"
                         name="name"
                         placeholder="Full Name"
+                        value={formData.name}
                         onChange={handleChange}
                         required
                         className="w-full border p-3 rounded-lg"

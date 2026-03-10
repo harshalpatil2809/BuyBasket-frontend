@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NoProduct from "../../UI/NoProduct";
 
 const Product = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
   const [addingCart, setAddingCart] = useState(false);
@@ -192,6 +192,18 @@ const Product = () => {
 
             <button
               disabled={!inStock}
+              onClick={() =>
+                navigate("/delivery", {
+                  state: {
+                    product: {
+                      product_name: product.title,
+                      price: product.price,
+                      quantity: 1,
+                      image: product.thumbnail,
+                    },
+                  },
+                })
+              }
               className="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition font-semibold"
             >
               Buy Now

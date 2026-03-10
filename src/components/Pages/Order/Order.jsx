@@ -23,7 +23,7 @@ const Order = () => {
           }
         );
 
-        setOrders(data);
+        setOrders(data);                                                                                                            
 
       } catch (error) {
 
