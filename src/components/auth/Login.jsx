@@ -14,17 +14,18 @@ const Login = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
+    
     if (token) {
       navigate("/user");
     }
   }, []);
-
+  
   const LoginData = async () => {
     setLoading(true);
     try {
+      const API = import.meta.env.VITE_API_URL;
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/login/",
+        `${API}/api/login/`,
         {
           email: email,
           password: password,
