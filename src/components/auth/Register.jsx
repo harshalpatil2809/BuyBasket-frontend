@@ -25,7 +25,8 @@ const Register = () => {
   const Response = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/register/", {
+      const API = import.meta.env.VITE_API_URL;
+      const response = await axios.post(`${API}/api/register/`, {
         name: name,
         email: email,
         password: password,

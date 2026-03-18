@@ -15,9 +15,9 @@ const User = () => {
         navigate("/login", { replace: true });
         return;
       }
-
+      const API = import.meta.env.VITE_API_URL;
       const { data } = await axios.get(
-        "http://127.0.0.1:8000/api/user/",
+        `${API}/api/user/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

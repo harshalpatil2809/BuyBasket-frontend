@@ -32,8 +32,8 @@ const Payment = () => {
                     pincode: address.pincode,
                     payment_method: method,
                 };
-
-                await axios.post("http://127.0.0.1:8000/orders/create/", orderData, {
+                const API = import.meta.env.VITE_API_URL;
+                await axios.post(`${API}/orders/create/`, orderData, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

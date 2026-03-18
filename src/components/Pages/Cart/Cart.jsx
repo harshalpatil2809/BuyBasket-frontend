@@ -35,8 +35,8 @@ const Cart = () => {
   const removeItem = async (id) => {
     try {
       const token = localStorage.getItem("token");
-
-      await axios.delete(`http://127.0.0.1:8000/cart/remove/${id}/`, {
+      const API = import.meta.env.VITE_API_URL;
+      await axios.delete(`${API}/cart/remove/${id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

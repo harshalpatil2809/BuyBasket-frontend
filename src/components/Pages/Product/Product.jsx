@@ -49,9 +49,9 @@ const Product = () => {
 
     try {
       setAddingCart(true);
-
+      const API = import.meta.env.VITE_API_URL;
       await axios.post(
-        "http://127.0.0.1:8000/cart/addcart/",
+        `${API}/cart/addcart/`,
         {
           product_name: product.title,
           price: product.price,
