@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import OrderLoader from "../../UI/OrderLoader";
 
 const Order = () => {
 
@@ -30,8 +31,9 @@ const Order = () => {
         console.log(error);
 
       } finally {
-
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
 
       }
 
@@ -43,8 +45,8 @@ const Order = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-green-200 text-2xl font-semibold">
-        Loading orders...
+      <div className="text-black/50 min-h-screen flex items-center justify-center bg-green-200 text-3xl md:text-4xl font-bold text-center px-4">
+      <OrderLoader />
       </div>
     );
   }
@@ -85,7 +87,7 @@ const Order = () => {
 
               <div className="font-medium">{order.product_name}</div>
 
-              <div className="text-gray-600">${order.price}</div>
+              <div className="text-gray-600">${(order.price * 81).toFixed(2)}</div>
 
               <div className="text-gray-600">{order.quantity}</div>
 

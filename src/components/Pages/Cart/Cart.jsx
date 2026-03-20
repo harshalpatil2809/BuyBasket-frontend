@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CartLoader from "../../UI/CartLoader";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -52,9 +53,7 @@ const Cart = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-green-200">
-        Loading cart...
-      </div>
+      <CartLoader items={2}/>
     );
   }
 
@@ -104,11 +103,11 @@ const Cart = () => {
                 </div>
               </div>
 
-              <div className="text-gray-600">${item.price}</div>
+              <div className="text-gray-600">${item.price * 81}</div>
 
               <div className="text-gray-600">{item.quantity}</div>
 
-              <div className="font-semibold text-gray-800">${item.total}</div>
+              <div className="font-semibold text-gray-800">${item.total * 81}</div>
             </div>
           ))}
         </div>

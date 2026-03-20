@@ -35,7 +35,7 @@ const CategoryCard = ({ thumbnail, brand, price, rating, id }) => {
             {/* Price + Rating */}
             <div className="flex justify-center items-center gap-4 mt-2">
                 <span className="text-green-600 font-bold text-lg">
-                    ${price}
+                    ₹{(price*81).toFixed(2)}
                 </span>
 
                 {rating && (

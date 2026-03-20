@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import NoProduct from "../../UI/NoProduct";
+import ProductLoader from "../../UI/ProductLoader";
 
 const Product = () => {
   const { id } = useParams();
@@ -11,6 +12,8 @@ const Product = () => {
   const [loading, setLoading] = useState(false);
   const [addingCart, setAddingCart] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -67,7 +70,7 @@ const Product = () => {
 
       toast.success("Added to cart");
     } catch (error) {
-      console.error(error);
+      console.error(error)
       toast.error("Failed to add product");
     } finally {
       setAddingCart(false);
@@ -75,11 +78,7 @@ const Product = () => {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-green-200">
-        <p className="text-xl font-semibold">Loading product...</p>
-      </div>
-    );
+    return <ProductLoader />;
   }
 
   if (!product) return <NoProduct />;
@@ -106,11 +105,10 @@ const Product = () => {
                 alt="product"
                 onClick={() => setSelectedImage(img)}
                 className={`w-20 h-20 object-cover rounded-lg cursor-pointer transition
-                ${
-                  selectedImage === img
+                ${selectedImage === img
                     ? "ring-2 ring-green-500"
                     : "hover:scale-105"
-                }`}
+                  }`}
               />
             ))}
           </div>
@@ -135,11 +133,10 @@ const Product = () => {
 
             <span
               className={`px-3 py-1 rounded-full text-sm font-medium
-              ${
-                inStock
+              ${inStock
                   ? "bg-green-100 text-green-700"
                   : "bg-red-100 text-red-600"
-              }`}
+                }`}
             >
               {inStock ? "In Stock" : "Out of Stock"}
             </span>
@@ -148,7 +145,7 @@ const Product = () => {
           {/* Price */}
           <div className="mt-6">
             <p className="text-3xl font-bold text-green-600">
-              ${product.price.toFixed(2)}
+              ₹{(product.price * 81).toFixed(2)}
             </p>
 
             <p className="text-sm text-gray-500">
@@ -179,32 +176,37 @@ const Product = () => {
           <div className="flex w-full gap-3 mt-8">
             <button
               onClick={handleAddToCart}
+              hidden={!token}
               disabled={!inStock || addingCart}
               className={`w-1/2 py-3 rounded-xl font-semibold transition
-              ${
-                inStock
+              ${inStock
                   ? "bg-green-600 hover:bg-green-700 text-white"
                   : "bg-gray-400 cursor-not-allowed text-white"
-              }`}
+                }`}
             >
               {addingCart ? "Adding..." : "Add to Cart"}
             </button>
 
             <button
-              disabled={!inStock}
-              onClick={() =>
+              disabled={!inStock || !token}
+              hidden={!token}
+              onClick={() => {
                 navigate("/delivery", {
                   state: {
                     product: {
                       product_name: product.title,
-                      price: product.price,
+                      price: (product.price * 81).toFixed(2),
                       quantity: 1,
                       image: product.thumbnail,
                     },
                   },
-                })
-              }
-              className="w-1/2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition font-semibold"
+                });
+              }}
+              className={`w-1/2 py-3 rounded-xl transition font-semibold
+    ${inStock && token
+                  ? "bg-blue-600 hover:bg-blue-700 text-white"
+                  : "bg-gray-400 cursor-not-allowed text-white"
+                }`}
             >
               Buy Now
             </button>

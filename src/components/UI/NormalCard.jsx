@@ -27,7 +27,7 @@ const NormalCard = ({ product}) => {
 
       <div className="flex items-center justify-center gap-4 mt-2">
         <p className="text-xl font-bold text-green-600">
-          ${product.price}
+          ₹{(product.price * 81).toFixed(2) }
         </p>
 
         {product.rating && (

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaSearch,
@@ -14,150 +14,214 @@ import {
   FaBasketShopping,
   FaCartShopping,
   FaCircleInfo,
+  FaSignOutAlt,
 } from "react-icons/fa6";
 import Context from "../context/Context";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const { search, setSearch } = useContext(Context);
   const navigate = useNavigate();
 
   const toggleMobile = () => setMobileOpen((prev) => !prev);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const linkClass = ({ isActive }) =>
     isActive
       ? "text-black underline font-bold block py-2 flex items-center gap-3"
       : "text-gray-600 block py-2 flex items-center gap-3 font-semibold";
 
+  const Logout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const { data } = await axios.post(
+        "http://127.0.0.1:8000/api/logout/",
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (data.message === "success") {
+        localStorage.clear();
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error(
+        "Logout error:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
   let productList = [
-    "beauty",
-    "fragrances",
-    "furniture",
-    "groceries",
-    "home-decoration",
-    "kitchen-accessories",
-    "laptops",
-    "mens-shirts",
-    "mens-shoes",
-    "mens-watches",
-    "mobile-accessories",
-    "motorcycle",
-    "skin-care",
-    "smartphones",
-    "sports-accessories",
-    "sunglasses",
-    "tablets",
-    "tops",
-    "vehicle",
-    "womens-bags",
-    "womens-dresses",
-    "womens-jewellery",
-    "womens-shoes",
-    "womens-watches",
+    "beauty","fragrances","furniture","groceries","home-decoration",
+    "kitchen-accessories","laptops","mens-shirts","mens-shoes",
+    "mens-watches","mobile-accessories","motorcycle","skin-care",
+    "smartphones","sports-accessories","sunglasses","tablets",
+    "tops","vehicle","womens-bags","womens-dresses",
+    "womens-jewellery","womens-shoes","womens-watches",
   ];
 
   function handleSearch(e) {
     e.preventDefault();
 
-    const trimmedInput = search.trim();
-    const normalizedInput = trimmedInput.toLowerCase();
+    const trimmedInput = search.trim().toLowerCase();
 
     if (!search) {
       toast.warning("Search Something");
       return;
     }
 
-    if (productList.includes(normalizedInput)) {
-      navigate(`/categoriesdetail/${normalizedInput}`);
+    if (productList.includes(trimmedInput)) {
+      navigate(`/categoriesdetail/${trimmedInput}`);
       setSearch("");
     } else {
       toast.error("The item you search is not available yet.");
       setSearch("");
     }
   }
+
   return (
     <>
       <ToastContainer position="top-right" autoClose={2000} />
-      <div className="fixed w-full py-3 flex lg:justify-around md:justify-around justify-between lg:px-0 md:px-0 px-5 items-center bg-white/40 z-50">
-        <div className="lg:text-xl md:text-xl text-md font-bold flex gap-2 items-center text-black/80 mr-2">
+
+      {/* Navbar */}
+      <div className="fixed w-full py-3 flex justify-between px-5 items-center bg-white/40 z-50">
+
+        {/* Logo */}
+        <div className="lg:text-xl text-md font-bold flex gap-2 items-center text-black/80">
           <FaBasketShopping /> BuyBasket
         </div>
+
+        {/* Search */}
         <form
           onSubmit={handleSearch}
-          className=" flex items-center justify-end lg:w-2/5 md:gap-5 gap-2"
+          className="flex items-center lg:w-2/5 gap-2"
         >
           <input
             type="text"
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
+            onChange={(e) => setSearch(e.target.value)}
             className="border bg-white/40 rounded-full px-5 py-2 w-full"
             placeholder="Search"
           />
-          <button type="submit" className=" lg:block md:block">
-            <FaSearch size={22}/>
+          <button type="submit">
+            <FaSearch size={20} />
           </button>
         </form>
-        <div className="hidden lg:flex md:flex items-center justify-center gap-8">
+
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex items-center gap-6">
+
           <NavLink to="/" className={linkClass}>
             <FaHome />
           </NavLink>
+
           <NavLink to="about" className={linkClass}>
             <FaInfoCircle />
           </NavLink>
+
           <NavLink to="categories" className={linkClass}>
             <FaTh />
           </NavLink>
+
           <NavLink to="cart" className={linkClass}>
             <FaCartShopping />
           </NavLink>
+
           <NavLink to="user" className={linkClass}>
             <FaUser />
           </NavLink>
+
+          {/* Logout */}
+          {isLoggedIn && (
+            <button
+              onClick={Logout}
+              className="flex items-center gap-2 text-red-600 font-semibold"
+            >
+              <FaSignOutAlt />
+              Logout
+            </button>
+          )}
         </div>
 
-        {/* Mobile Navbar Toggle */}
-        <div className="lg:hidden md:hidden ml-4 flex items-center">
-          <button onClick={toggleMobile} aria-label="Open menu">
+        {/* Mobile Toggle */}
+        <div className="lg:hidden">
+          <button onClick={toggleMobile}>
             {mobileOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Side drawer for mobile */}
+      {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="fixed inset-0 bg-opacity-50 z-40">
-          <aside className="fixed top-0 bg-green-300 right-0 h-full w-1/2  p-6 flex flex-col justify-start gap-6 pt-15">
-            <nav className="space-y-4">
+        <>
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 bg-black/30 z-40"
+            onClick={toggleMobile}
+          ></div>
+
+          {/* Drawer */}
+          <aside className="fixed top-0 right-0 h-full w-1/2 bg-green-300 z-50 p-6 shadow-lg">
+
+            {/* Close Button */}
+            <div className="flex justify-end mb-6">
+              <button onClick={toggleMobile}>
+                <FaTimes size={24} />
+              </button>
+            </div>
+
+            <nav className="space-y-5">
+
               <NavLink to="/" className={linkClass} onClick={toggleMobile}>
-                <FaHome />
-                Home
+                <FaHome /> Home
               </NavLink>
+
               <NavLink to="about" className={linkClass} onClick={toggleMobile}>
-                <FaCircleInfo />
-                About
+                <FaCircleInfo /> About
               </NavLink>
-              <NavLink
-                to="categories"
-                className={linkClass}
-                onClick={toggleMobile}
-              >
-                <FaAddressCard />
-                Category
+
+              <NavLink to="categories" className={linkClass} onClick={toggleMobile}>
+                <FaAddressCard /> Category
               </NavLink>
+
               <NavLink to="cart" className={linkClass} onClick={toggleMobile}>
-                <FaCartShopping />
-                Cart
+                <FaCartShopping /> Cart
               </NavLink>
+
               <NavLink to="user" className={linkClass} onClick={toggleMobile}>
-                <FaUser />
-                User
+                <FaUser /> User
               </NavLink>
+
+              {/* Logout Mobile */}
+              {isLoggedIn && (
+                <button
+                  onClick={() => {
+                    Logout();
+                    toggleMobile();
+                  }}
+                  className="flex items-center gap-3 text-red-600 font-semibold"
+                >
+                  <FaSignOutAlt />
+                  Logout
+                </button>
+              )}
             </nav>
           </aside>
-        </div>
+        </>
       )}
     </>
   );
