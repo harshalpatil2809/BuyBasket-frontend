@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaSearch,
@@ -26,7 +26,7 @@ import { LogOut } from "lucide-react";
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { search, setSearch } = useContext(Context);
-  const token = localStorage.getItem('toekn')
+  const token = localStorage.getItem('token')
   const navigate = useNavigate();
   const toggleMobile = () => setMobileOpen((prev) => !prev);
 
@@ -38,9 +38,9 @@ const Navbar = () => {
   const Logout = async () => {
     try {
       const token = localStorage.getItem("token");
-
+      const API = import.meta.env.VITE_API_URL;
       const { data } = await axios.post(
-        "http://127.0.0.1:8000/api/logout/",
+        `${API}/api/logout/`,
         null,
         {
           headers: {
@@ -70,11 +70,6 @@ const Navbar = () => {
     "womens-jewellery","womens-shoes","womens-watches",
   ];
 
-  useEffect(() => {
-      const token = localStorage.getItem('toekn')
-  
-    
-  }, [])
   
   function handleSearch(e) {
     e.preventDefault();
