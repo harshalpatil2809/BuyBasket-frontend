@@ -14,12 +14,12 @@ import {
   FaBasketShopping,
   FaCartShopping,
   FaCircleInfo,
-  FaSignOutAlt,
+
 } from "react-icons/fa6";
 import Context from "../context/Context";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-
+import { LogOut } from "lucide-react";
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -151,7 +151,7 @@ const Navbar = () => {
               onClick={Logout}
               className="flex items-center gap-2 text-red-600 font-semibold"
             >
-              <FaSignOutAlt />
+              <LogOut />
               Logout
             </button>
           )}
