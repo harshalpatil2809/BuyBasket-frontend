@@ -210,10 +210,10 @@ const Navbar = () => {
                     Logout();
                     toggleMobile();
                   }}
-                  className="flex items-center gap-3 text-red-600 font-semibold"
+                  className={`flex items-center gap-3 text-red-600 font-semibold `}
                 >
                   <LogOut strokeWidth={3} />
-
+                  Logout
                 </button>
             </nav>
           </aside>
