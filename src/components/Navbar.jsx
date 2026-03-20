@@ -147,7 +147,7 @@ const Navbar = () => {
             <button
               hidden={!token}
               onClick={Logout}
-              className="flex items-center gap-2 text-red-600 font-semibold"
+              className="flex items-center gap-2 text-red-600 font-semibold cursor-pointer"
             >
               <LogOut strokeWidth={3} />
             </button>
