@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaSearch,
@@ -22,17 +22,12 @@ import axios from "axios";
 import { LogOut } from "lucide-react";
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const { search, setSearch } = useContext(Context);
+  const token = localStorage.getItem('toekn')
+
   const navigate = useNavigate();
 
   const toggleMobile = () => setMobileOpen((prev) => !prev);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
 
   const linkClass = ({ isActive }) =>
     isActive
@@ -98,7 +93,7 @@ const Navbar = () => {
       <ToastContainer position="top-right" autoClose={2000} />
 
       {/* Navbar */}
-      <div className="fixed w-full py-3 flex justify-between px-5 items-center bg-white/40 z-50">
+      <div className="fixed w-full py-3 flex justify-between items-center bg-white/40 z-50 lg:px-20 md:px-20 px-4">
 
         {/* Logo */}
         <div className="lg:text-xl text-md font-bold flex gap-2 items-center text-black/80">
@@ -146,15 +141,14 @@ const Navbar = () => {
           </NavLink>
 
           {/* Logout */}
-          {isLoggedIn && (
+          
             <button
+              hidden={!token}
               onClick={Logout}
               className="flex items-center gap-2 text-red-600 font-semibold"
             >
               <LogOut />
-              Logout
             </button>
-          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -207,18 +201,18 @@ const Navbar = () => {
               </NavLink>
 
               {/* Logout Mobile */}
-              {isLoggedIn && (
+              
                 <button
+                  hidden={!token}
                   onClick={() => {
                     Logout();
                     toggleMobile();
                   }}
                   className="flex items-center gap-3 text-red-600 font-semibold"
                 >
-                  <FaSignOutAlt />
-                  Logout
+                  <LogOut />
+
                 </button>
-              )}
             </nav>
           </aside>
         </>
