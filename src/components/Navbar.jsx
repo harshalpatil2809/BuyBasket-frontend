@@ -149,7 +149,7 @@ const Navbar = () => {
               onClick={Logout}
               className="flex items-center gap-2 text-red-600 font-semibold"
             >
-              <LogOut strokeWidth={2} />
+              <LogOut strokeWidth={3} />
             </button>
         </div>
 
@@ -212,7 +212,7 @@ const Navbar = () => {
                   }}
                   className="flex items-center gap-3 text-red-600 font-semibold"
                 >
-                  <LogOut />
+                  <LogOut strokeWidth={3} />
 
                 </button>
             </nav>
