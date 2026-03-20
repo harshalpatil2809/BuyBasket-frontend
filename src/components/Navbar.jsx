@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaSearch,
@@ -20,13 +20,14 @@ import Context from "../context/Context";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { LogOut } from "lucide-react";
+
+
+
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { search, setSearch } = useContext(Context);
   const token = localStorage.getItem('toekn')
-
   const navigate = useNavigate();
-
   const toggleMobile = () => setMobileOpen((prev) => !prev);
 
   const linkClass = ({ isActive }) =>
@@ -69,6 +70,12 @@ const Navbar = () => {
     "womens-jewellery","womens-shoes","womens-watches",
   ];
 
+  useEffect(() => {
+      const token = localStorage.getItem('toekn')
+  
+    
+  }, [])
+  
   function handleSearch(e) {
     e.preventDefault();
 
@@ -103,13 +110,13 @@ const Navbar = () => {
         {/* Search */}
         <form
           onSubmit={handleSearch}
-          className="flex items-center lg:w-2/5 gap-2"
+          className="flex items-center lg:w-2/5  gap-2"
         >
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border bg-white/40 rounded-full px-5 py-2 w-full"
+            className="border bg-white/40 rounded-full px-5 py-2 lg:w-full md:w-full w-4/5 "
             placeholder="Search"
           />
           <button type="submit">
@@ -118,7 +125,7 @@ const Navbar = () => {
         </form>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex md:flex items-center gap-6">
 
           <NavLink to="/" className={linkClass}>
             <FaHome />
@@ -152,7 +159,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <div className="lg:hidden">
+        <div className="lg:hidden md:hidden flex items-center">
           <button onClick={toggleMobile}>
             {mobileOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
