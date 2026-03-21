@@ -60,7 +60,7 @@ const Order = () => {
   }
 
   return (
-    <div className="min-h-screen bg-green-200 py-10 md:py-20 px-4">
+    <div className="min-h-screen bg-green-200 py-30 md:py-20 px-4">
 
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-2xl p-4 md:p-8">
 

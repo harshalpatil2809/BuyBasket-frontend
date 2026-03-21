@@ -39,7 +39,7 @@ const Delivery = () => {
     };
 
     return (
-        <div className="min-h-screen bg-green-200 flex items-center justify-center px-6">
+        <div className="min-h-screen bg-green-200 flex items-center justify-center px-6 py-15">
 
             <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-xl">
 

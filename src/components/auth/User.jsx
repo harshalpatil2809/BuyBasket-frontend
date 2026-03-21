@@ -70,7 +70,7 @@ const User = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-green-200 flex items-center justify-center px-6 lg:py-0 md:py-0 py-20">
+    <div className="min-h-screen bg-green-200 flex items-center justify-center px-6 lg:py-0 md:py-0 py-30">
 
       <div className="w-full max-w-4xl">
 
