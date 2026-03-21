@@ -4,23 +4,29 @@ import SkeletonLoader from "../../UI/SkeletonLoader";
 import HeroCard from "../../UI/HeroCard";
 import HeroCategory from "../../UI/HeroCategory";
 import NormalCard from "../../UI/NormalCard";
-
 const Beauty =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179506/Beauty_x0b98r.jpg";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1774086428/Beauty_rprzg2.png";
+
 const Fragrances =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179508/Fragrances_ilxkts.jpg";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1774086428/Fragrances_bjz56a.png";
+
 const Furniture =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179511/Furniture_budcgw.jpg";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1774086428/Furniture_vtfrsn.png";
+
 const Groceries =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179507/Groceries_gt83bz.jpg";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1774086428/Groceries_telb68.png";
+
 const Sunglasses =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179522/Sunglasses_re9ven.jpg";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1774086428/Sunglasses_l4kwja.png";
+
 const Laptops =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179508/Laptops_pjpkm8.jpg";
-const Mens_Shirts =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179515/Men_sShirt_k7dgve.jpg";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1774086428/Laptops_bnz5ct.png";
+
 const Tops =
-  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772179530/Womens_Dresses_pvoteb.jpg";
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1774086428/Tops_cnw671.png";
+
+const Mobiles =
+  "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1774086428/Mobiles_pkmhzs.png";
 
 const HeroIMG1 =
   "https://res.cloudinary.com/dz5yaloug/image/upload/f_auto,q_auto,w_600/v1772532647/banner-washing-machines_bg5ogq.png";
@@ -38,7 +44,7 @@ const categories = [
   { img: Groceries, name: "Groceries", cate: "groceries" },
   { img: Sunglasses, name: "Sunglasses", cate: "sunglasses" },
   { img: Laptops, name: "Laptops", cate: "laptops" },
-  { img: Mens_Shirts, name: "Mens Shirts", cate: "mens-shirts" },
+  { img: Mobiles, name: "Mobiles", cate: "smartphones" },
   { img: Tops, name: "Tops", cate: "tops" },
 ];
 
