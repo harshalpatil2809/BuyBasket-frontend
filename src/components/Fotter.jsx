@@ -54,37 +54,35 @@ const Fotter = () => {
           <h3 className="text-black font-semibold mb-4">Quick Link</h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="#" className="hover:text-orange-400">
+              <Link to={'/'}>
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-orange-400">
+              <Link to={'about'}>
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="hover:text-orange-400">
+              <Link to={'categories'}>
                 Catergries
-              </a>
+              </Link>
+
             </li>
             <li>
-              <a href="#" className="hover:text-orange-400">
+              <Link to={'cart'}>
                 Cart
-              </a>
+              </Link>
             </li>
-            <li>
-              <a href="#" className="hover:text-orange-400">
-                Orders
-              </a>
-            </li>
+
           </ul>
         </div>
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-gray-700 py-4 w-2/3 text-center text-sm text-gray-400">
-        © {new Date().getFullYear()} BuyBasket. All rights reserved.
+      <div className="border-t border-gray-700 py-4 w-2/3 text-center text-sm text-gray-800">
+        <p>© {new Date().getFullYear()} BuyBasket. All rights reserved.</p>
+        <p>Made With ❤️ By Harshal</p>
       </div>
     </footer>
   );
