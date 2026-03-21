@@ -2,7 +2,7 @@ import React from "react";
 
 const CartLoader = ({ items = 4 }) => {
     return (
-        <div className="min-h-screen bg-green-200 py-20 px-6 animate-pulse">
+        <div className="min-h-screen bg-green-200 py-30 px-6 animate-pulse">
             <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
 
                 {/* LEFT: Items Section */}

@@ -151,7 +151,7 @@ const Categories = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-[#B9F8CF] to-[#A0E9C2]">
+        <div className="min-h-screen bg-linear-to-br from-[#B9F8CF] to-[#A0E9C2] py-15 lg:py-0 md:py-0">
 
             <div className="p-5 md:p-10">
                 {/* Title */}

@@ -14,7 +14,7 @@ const About = () => {
     <div className="min-h-screen bg-green-200 text-gray-800">
 
       {/* Hero Section */}
-      <section className="text-center px-6 py-20">
+      <section className="text-center px-6 py-30">
         <h1 className="text-5xl font-extrabold text-green-700 mb-6 tracking-tight">
           BuyBasket
         </h1>

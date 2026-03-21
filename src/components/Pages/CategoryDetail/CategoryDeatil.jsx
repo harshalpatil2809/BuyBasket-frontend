@@ -53,7 +53,7 @@ const CategoryDeatil = () => {
   }, [categorie]);
 
   return (
-    <div className="py-20 text-black min-h-screen bg-green-200 lg:px-10 md:px-10 px-2">
+    <div className="py-30 text-black min-h-screen bg-green-200 lg:px-10 md:px-10 px-2">
       <div className="flex flex-wrap lg:gap-6 md:gap-6 gap-2 items-center justify-center w-full">
         {loading ? (
           <div

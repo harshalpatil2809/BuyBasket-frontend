@@ -80,7 +80,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-green-200 py-20 px-4">
+    <div className="min-h-screen bg-green-200 py-30 px-4">
       <div className="max-w-7xl mx-auto">
 
         {/* 🔥 HERO SECTION */}

@@ -66,7 +66,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen bg-green-200 py-20 px-6">
+    <div className="min-h-screen bg-green-200 py-30 px-6">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
         {/* Cart Items */}
         <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6">

@@ -14,20 +14,18 @@ import {
   FaBasketShopping,
   FaCartShopping,
   FaCircleInfo,
-
 } from "react-icons/fa6";
 import Context from "../context/Context";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { LogOut } from "lucide-react";
 
-
-
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { search, setSearch } = useContext(Context);
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
+
   const toggleMobile = () => setMobileOpen((prev) => !prev);
 
   const linkClass = ({ isActive }) =>
@@ -39,6 +37,7 @@ const Navbar = () => {
     try {
       const token = localStorage.getItem("token");
       const API = import.meta.env.VITE_API_URL;
+
       const { data } = await axios.post(
         `${API}/api/logout/`,
         null,
@@ -54,10 +53,7 @@ const Navbar = () => {
         navigate("/login");
       }
     } catch (error) {
-      console.error(
-        "Logout error:",
-        error.response?.data || error.message
-      );
+      console.error("Logout error:", error.response?.data || error.message);
     }
   };
 
@@ -70,7 +66,6 @@ const Navbar = () => {
     "womens-jewellery","womens-shoes","womens-watches",
   ];
 
-  
   function handleSearch(e) {
     e.preventDefault();
 
@@ -95,23 +90,34 @@ const Navbar = () => {
       <ToastContainer position="top-right" autoClose={2000} />
 
       {/* Navbar */}
-      <div className="fixed w-full py-3 flex justify-between items-center bg-white/40 z-50 lg:px-20 md:px-20 px-4">
+      <div className="fixed w-full py-3 flex flex-col lg:flex-row justify-between items-center bg-white/40 z-50 lg:px-20 md:px-20 px-4 gap-3">
 
-        {/* Logo */}
-        <div className="lg:text-xl text-md font-bold flex gap-2 items-center text-black/80">
-          <FaBasketShopping /> BuyBasket
+        {/* Top Row (Logo + Menu Button) */}
+        <div className="w-full flex justify-between items-center lg:w-auto">
+          
+          {/* Logo */}
+          <div className="lg:text-xl text-md font-bold flex gap-2 items-center text-black/80">
+            <FaBasketShopping /> BuyBasket
+          </div>
+
+          {/* Mobile Toggle */}
+          <div className="lg:hidden md:hidden flex items-center">
+            <button onClick={toggleMobile}>
+              {mobileOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Search */}
         <form
           onSubmit={handleSearch}
-          className="flex items-center lg:w-2/5  gap-2"
+          className="flex items-center w-full lg:w-2/5 gap-2"
         >
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border bg-white/40 rounded-full px-5 py-2 lg:w-full md:w-full w-4/5 "
+            className="border bg-white/40 rounded-full px-5 py-2 w-full"
             placeholder="Search"
           />
           <button type="submit">
@@ -143,20 +149,12 @@ const Navbar = () => {
           </NavLink>
 
           {/* Logout */}
-          
-            <button
-              hidden={!token}
-              onClick={Logout}
-              className="flex items-center gap-2 text-red-600 font-semibold cursor-pointer"
-            >
-              <LogOut strokeWidth={3} />
-            </button>
-        </div>
-
-        {/* Mobile Toggle */}
-        <div className="lg:hidden md:hidden flex items-center">
-          <button onClick={toggleMobile}>
-            {mobileOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          <button
+            hidden={!token}
+            onClick={Logout}
+            className="flex items-center gap-2 text-red-600 font-semibold cursor-pointer"
+          >
+            <LogOut strokeWidth={3} />
           </button>
         </div>
       </div>
@@ -202,19 +200,18 @@ const Navbar = () => {
                 <FaUser /> User
               </NavLink>
 
-              {/* Logout Mobile */}
-              
-                <button
-                  hidden={!token}
-                  onClick={() => {
-                    Logout();
-                    toggleMobile();
-                  }}
-                  className={`flex items-center gap-3 text-red-600 font-semibold `}
-                >
-                  <LogOut strokeWidth={3} />
-                  Logout
-                </button>
+              {/* Logout */}
+              <button
+                hidden={!token}
+                onClick={() => {
+                  Logout();
+                  toggleMobile();
+                }}
+                className="flex items-center gap-3 text-red-600 font-semibold"
+              >
+                <LogOut strokeWidth={3} />
+                Logout
+              </button>
             </nav>
           </aside>
         </>
