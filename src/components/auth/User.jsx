@@ -42,9 +42,10 @@ const User = () => {
   const Logout = async () => {
     try {
       const token = localStorage.getItem("token");
-
+      
+      const API = import.meta.env.VITE_API_URL;
       const { data } = await axios.post(
-        "http://127.0.0.1:8000/api/logout/",
+        `${API}/api/logout/`,
         null,
         {
           headers: {
