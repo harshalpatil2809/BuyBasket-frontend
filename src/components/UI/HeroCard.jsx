@@ -6,8 +6,12 @@ const HeroCard = ({ img, title }) => {
       <img
         src={img}
         alt={title}
-        className="w-full h-full object-cover select-none"
+        className=" object-cover select-none"
+        width="1500"
+        height="1000"
+        loading="eager"
         draggable="false"
+        fetchPriority="high"
       />
       
     </div>
