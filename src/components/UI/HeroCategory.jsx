@@ -16,27 +16,36 @@ const HeroCategory = ({ img, name }) => {
       hover:-translate-y-2 group border border-green-100"
     >
       {/* Image Container */}
-      <div className="w-20 h-20 flex items-center justify-center rounded-full 
-      bg-green-50 group-hover:bg-green-100 transition duration-300">
-        
+      <div
+        className="w-20 h-20 flex items-center justify-center rounded-full 
+      bg-green-50 group-hover:bg-green-100 transition duration-300"
+      >
         <img
           src={img}
           alt={name}
-          className="w-16 h-16 object-contain transition duration-300 
-          group-hover:scale-110"
+          width="64"
+          height="64"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           draggable="false"
+          className="w-16 h-16 object-contain transition duration-300 group-hover:scale-110"
         />
       </div>
 
       {/* Text */}
-      <h3 className="mt-4 text-sm font-semibold text-green-900 text-center 
-      group-hover:text-green-700 transition">
+      <h3
+        className="mt-4 text-sm font-semibold text-green-900 text-center 
+      group-hover:text-green-700 transition"
+      >
         {name}
       </h3>
 
       {/* Underline effect */}
-      <div className="w-0 h-0.5 bg-green-600 mt-2 
-      transition-all duration-300 group-hover:w-10 rounded-full"></div>
+      <div
+        className="w-0 h-0.5 bg-green-600 mt-2 
+      transition-all duration-300 group-hover:w-10 rounded-full"
+      ></div>
     </div>
   );
 };
