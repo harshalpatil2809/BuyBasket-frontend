@@ -35,11 +35,22 @@ const Register = () => {
       toast.success("Registration successful! Redirecting...");
       navigate("/login");
     } catch (error) {
-      const errMsg =
-        error.response?.data?.detail || error.response?.data || error.message;
-      console.error(errMsg);
-      toast.error(typeof errMsg === "string" ? errMsg : JSON.stringify(errMsg));
-    } finally {
+  const serverError = error.response?.data;
+  let errMsg = "Something went wrong";
+
+  if (serverError) {
+    if (typeof serverError === "object") {
+      errMsg = Object.values(serverError).flat().join(", ");
+    } else {
+      errMsg = serverError;
+    }
+  } else {
+    errMsg = error.message;
+  }
+
+  console.error("Full Error:", serverError);
+  toast.error(errMsg);
+} finally {
       setLoading(false);
     }
   };
