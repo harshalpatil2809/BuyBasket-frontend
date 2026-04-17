@@ -29,9 +29,11 @@ const Login = () => {
         {
           email: email,
           password: password,
-        },
-        { withCredentials: true },
-      );
+        }, {
+        headers: {
+        'Content-Type': 'application/json',
+        }
+      });
       toast.success("Login successful");
       const access =
         response?.data?.access || response?.data?.jwt || response?.data?.token;
