@@ -30,7 +30,7 @@ const Register = () => {
         name: name,
         email: email,
         password: password,
-      },, {
+      }, {
         headers: {
         'Content-Type': 'application/json',
         }
